@@ -7,18 +7,18 @@ db = sqlite3.connect(f) #open if f exists, otherwise create
 c = db.cursor()    #facilitate db ops
 
 #==========PEEP CREATION===========
-csvPeeps = csv.DictReader(open("peeps.csv"))
+dPeeps = csv.DictReader(open("peeps.csv"))
 q = "CREATE TABLE students (name TEXT, id INTEGER)"
 c.execute(q)
-for peep in csvPeeps:
+for peep in dPeeps:
     q = "INSERT INTO students VALUES (\"%s\", %d)" % (peep['name'],int(peep['id']))
     c.execute(q)
 
 #==========COURSES CREATION===========
-csvCourses = csv.DictReader(open("courses.csv"))
+dCourses = csv.DictReader(open("courses.csv"))
 q = "CREATE TABLE courses (code TEXT, id INTEGER, mark INTEGER)"
 c.execute(q)
-for course in csvCourses:
+for course in dCourses:
     q = "INSERT INTO courses VALUES (\"%s\", %d, %d)" % (course['code'],int(course['mark']),int(course['id']))
     c.execute(q)
 
