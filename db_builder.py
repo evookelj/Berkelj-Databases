@@ -9,11 +9,11 @@ c = db.cursor()    #facilitate db ops
 #==========PEEP CREATION===========
 dPeeps = csv.DictReader(open("peeps.csv"))
 try:
-    q = "CREATE TABLE students (name TEXT, id INTEGER)"
-    c.execute(q)
+    c.execute("CREATE TABLE students (name TEXT, id INTEGER)")
     for peep in dPeeps:
-        q = "INSERT INTO students VALUES (\"%s\", %d)" % (peep['name'],int(peep['id']))
-        c.execute(q)
+        query_template = "INSERT INTO students VALUES (?, ?)"
+        values = (peep['name'], int(peep['id']))
+        c.execute(query_template, values)
     print "TABLE students successfully populated with contents of 'peeps.csv'"
 except:
     print "Error: TABLE 'students' already exists. Cannot re-create. Delete %s and re-run this file to recreate table.\n" % (f)
@@ -21,11 +21,11 @@ except:
 #==========COURSES CREATION===========
 dCourses = csv.DictReader(open("courses.csv"))
 try:
-    q = "CREATE TABLE courses (code TEXT, id INTEGER, mark INTEGER)"
-    c.execute(q)
+    c.execute("CREATE TABLE courses (code TEXT, id INTEGER, mark INTEGER)")
     for course in dCourses:
-        q = "INSERT INTO courses VALUES (\"%s\", %d, %d)" % (course['code'],int(course['mark']),int(course['id']))
-        c.execute(q)
+        query_template = "INSERT INTO courses VALUES (?, ?, ?)"
+        values = (course['code'], int(course['mark']), int(course['id']))
+        c.execute(query_template, values)
     print "TABLE courses successfully populated with contents of 'courses.csv'"
 
 except:
