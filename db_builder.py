@@ -24,7 +24,7 @@ try:
     c.execute("CREATE TABLE courses (code TEXT, id INTEGER, mark INTEGER)")
     for course in dCourses:
         query_template = "INSERT INTO courses VALUES (?, ?, ?)"
-        values = (course['code'], int(course['mark']), int(course['id']))
+        values = (course['code'], int(course['id']), int(course['mark']))
         c.execute(query_template, values)
     print "TABLE courses successfully populated with contents of 'courses.csv'"
 
